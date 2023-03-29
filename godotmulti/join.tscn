@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6dpyu7jwyqo8"]
+
+[ext_resource type="Script" path="res://MultiBaseScript.cs" id="1_vik4i"]
+
+[node name="Join" type="Node2D"]
+script = ExtResource("1_vik4i")
+
+[node name="join" type="Button" parent="."]
+offset_left = 225.0
+offset_top = 220.0
+offset_right = 292.0
+offset_bottom = 248.0
+text = "join
+"
+
+[node name="host" type="Button" parent="."]
+offset_left = 350.0
+offset_top = 223.0
+offset_right = 417.0
+offset_bottom = 254.0
+text = "Host"
+
+[node name="ip" type="LineEdit" parent="."]
+offset_left = 144.0
+offset_top = 47.0
+offset_right = 289.0
+offset_bottom = 78.0
+
+[node name="port" type="LineEdit" parent="."]
+offset_left = 361.0
+offset_top = 47.0
+offset_right = 428.063
+offset_bottom = 78.0
+
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="host" to="." method="_on_host_pressed"]
