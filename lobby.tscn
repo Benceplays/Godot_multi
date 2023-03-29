@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtkktkyyaaq5u"]
+
+[ext_resource type="Script" path="res://lobby.cs" id="1_li63l"]
+[ext_resource type="PackedScene" uid="uid://bu1jbe8514rmo" path="res://character.tscn" id="2_ax62y"]
+
+[node name="lobby" type="Node2D"]
+script = ExtResource("1_li63l")
+psCharacter = ExtResource("2_ax62y")

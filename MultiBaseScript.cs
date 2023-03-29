@@ -24,7 +24,7 @@ public partial class MultiBaseScript : Node
 		Multiplayer.MultiplayerPeer = multi;
 		if (multi.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
 		{
-			OS.Alert("Nem sikerult");
+			GD.Print("Nem sikerult");
 			return;
 		}
 		StartGame();
@@ -35,7 +35,7 @@ public partial class MultiBaseScript : Node
 		Multiplayer.MultiplayerPeer = multi;
 		if (multi.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
 		{
-			OS.Alert("Nem sikerult");
+			GD.Print("Nem sikerult");
 			return;
 		}
 		StartGame();
@@ -43,6 +43,6 @@ public partial class MultiBaseScript : Node
 	public void StartGame()
 	{
 		GetTree().ChangeSceneToFile("res://lobby.tscn");
-		OS.Alert("Sikerult a kapcsolat");
+		GD.Print("Sikerult a kapcsolat");
 	}
 }
