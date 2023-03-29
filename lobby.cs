@@ -11,7 +11,7 @@ public partial class lobby : Node2D
 		Node2D new_player = (Node2D)psCharacter.Instantiate();
 		new_player.Name = Convert.ToString(GetTree().GetInstanceId());
 		GD.Print(GetTree().GetInstanceId());
-		new_player.Position = new Vector2(rnd.Next(0, 100), rnd.Next(0, 100));
+		new_player.Position = new Vector2(rnd.Next(0,1200), rnd.Next(0, 600));
 		AddChild(new_player);
 	}
 
