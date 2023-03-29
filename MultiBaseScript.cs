@@ -27,7 +27,8 @@ public partial class MultiBaseScript : Node
 		SetMultiplayerAuthority(id);
 		IsMultiplayerAuthority();
 		
-		https://www.youtube.com/watch?v=3xgDU4gRLps*/
+		https://www.youtube.com/watch?v=3xgDU4gRLps
+		https://godotengine.org/qa/143874/help-migration-c%23-code-from-3-5-to-4-0*/
 		
 
 		if (multi.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
