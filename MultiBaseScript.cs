@@ -22,6 +22,14 @@ public partial class MultiBaseScript : Node
 	{
 		multi.CreateClient(ip.Text, Convert.ToInt32(port.Text));
 		Multiplayer.MultiplayerPeer = multi;
+
+		/*var id = Multiplayer.GetUniqueId();
+		SetMultiplayerAuthority(id);
+		IsMultiplayerAuthority();
+		
+		https://www.youtube.com/watch?v=3xgDU4gRLps*/
+		
+
 		if (multi.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
 		{
 			GD.Print("Nem sikerult");
