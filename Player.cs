@@ -8,7 +8,9 @@ public partial class Player : CharacterBody3D {
     public float gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
 
     public PlayerInput input;
+    public string Nev {get; set;}
 	private Camera3D kamera;
+    private Label3D NevLabel;
     private int _player = 1;
     [Export]
     public int player {
@@ -27,6 +29,8 @@ public partial class Player : CharacterBody3D {
     }
 
     public override void _Ready() {
+        NevLabel = GetNode<Label3D>("NameLabel");
+        NevLabel.Text = Nev;
         GD.Print("Player._Ready, _player = ", player);
 
         if (player == Multiplayer.GetUniqueId()) {
@@ -39,7 +43,6 @@ public partial class Player : CharacterBody3D {
     }
 
     public override void _PhysicsProcess(double delta) {
-
         Vector3 tempVelocity = Velocity;
 
         if (!IsOnFloor()) {

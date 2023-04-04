@@ -53,5 +53,9 @@ placeholder_text = "Remote Host"
 caret_blink = true
 caret_blink_interval = 0.5
 
+[node name="Name" type="LineEdit" parent="UI/Net/Options"]
+layout_mode = 2
+placeholder_text = "Name"
+
 [connection signal="pressed" from="UI/Net/Options/Host" to="." method="_OnHostPressed"]
 [connection signal="pressed" from="UI/Net/Options/Connect" to="." method="_OnConnectPressed"]

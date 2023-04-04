@@ -4,10 +4,11 @@ using System;
 public partial class Multiplayer : Node {
     private const int PORT = 4433;
     public ENetMultiplayerPeer network;
-
     public Control ui;
+    public static LineEdit NameLabel;
 
     public override void _Ready() {
+        NameLabel = GetNode<LineEdit>("UI/Net/Options/Name");
         ui = GetNode<Control>("UI");
         // GetTree().Paused = true;
 
@@ -56,7 +57,6 @@ public partial class Multiplayer : Node {
         GD.Print("StartGame");
         ui.Hide();
         GetTree().Paused = false;
-
         if (Multiplayer.IsServer()) {
             CallDeferred(MethodName._ChangeLevel, ((PackedScene) ResourceLoader.Load("res://Level.tscn")));
         }
@@ -64,12 +64,10 @@ public partial class Multiplayer : Node {
 
     private void _ChangeLevel(PackedScene scene) {
         Node level = GetNode<Node>("Level");
-
         foreach (Node3D child in level.GetChildren()) {
             level.RemoveChild(child);
             child.QueueFree();
         }
-
         level.AddChild(scene.Instantiate());
     }
 
