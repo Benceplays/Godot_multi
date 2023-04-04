@@ -10,11 +10,16 @@ config_version=5
 
 [application]
 
-config/name="multitest"
-run/main_scene="res://join.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/name="MultiplayerTutorial"
+run/main_scene="res://Multiplayer.tscn"
+config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="multitest"
+project/assembly_name="MultiplayerTutorial"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

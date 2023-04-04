@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://lgtulu3ajvbj"]
+
+[ext_resource type="Script" path="res://Level.cs" id="1_6nswj"]
+[ext_resource type="PackedScene" uid="uid://t0kus6xfdhis" path="res://Sphere.tscn" id="1_iu82f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fiqqo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbcn0"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5pb7"]
+albedo_color = Color(0.247059, 0.129412, 0.678431, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a7mlv"]
+material = SubResource("StandardMaterial3D_c5pb7")
+size = Vector3(60, 1, 60)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_6nswj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 30, 30)
+current = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_fiqqo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_wbcn0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_a7mlv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.4435, 0)
+light_energy = 100.0
+omni_range = 80.0
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="Sphere" parent="Objects" instance=ExtResource("1_iu82f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+
+[node name="Sphere2" parent="Objects" instance=ExtResource("1_iu82f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.90642, 0)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn")
+spawn_path = NodePath("../Players")
+spawn_limit = 4
+
+[node name="Players" type="Node3D" parent="."]
