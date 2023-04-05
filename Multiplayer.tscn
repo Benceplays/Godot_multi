@@ -48,7 +48,7 @@ text = "Connect"
 [node name="Remote" type="LineEdit" parent="UI/Net/Options"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "10.11.1.229"
+text = "127.0.0.1"
 placeholder_text = "Remote Host"
 caret_blink = true
 caret_blink_interval = 0.5

@@ -5,7 +5,6 @@ public partial class Level : Node3D {
 
 	public const float SPAWN_RANDOM = 5.0f;
 	private RandomNumberGenerator rng = new RandomNumberGenerator();
-	public string NameToPlayer = "";
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -18,7 +17,7 @@ public partial class Level : Node3D {
 		Multiplayer.Connect(MultiplayerApi.SignalName.PeerConnected, new Callable(this, MethodName._AddPlayer));
 		Multiplayer.Connect(MultiplayerApi.SignalName.PeerDisconnected, new Callable(this, MethodName._DeletePlayer));
 		foreach(int id in Multiplayer.GetPeers()) {
-			GD.Print(id);
+			GD.Print($"Hozzáadott játékosok id: {id}");
 			_AddPlayer(id);
 		}
 
@@ -50,8 +49,6 @@ public partial class Level : Node3D {
 		newPlayer.Position = new Vector3(position.X * SPAWN_RANDOM * rng.Randf(), 0, position.Y * SPAWN_RANDOM * rng.Randf());
 
 		newPlayer.Name = id.ToString();
-        /*var Multiplayer = new Multiplayer();
-		newPlayer.Nev = Multiplayer.NameLabel.Text;	*/ 
 		GD.Print($"Adding {id} to scene tree");
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);
 	}

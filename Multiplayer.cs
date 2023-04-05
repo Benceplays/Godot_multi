@@ -6,6 +6,8 @@ public partial class Multiplayer : Node {
     public ENetMultiplayerPeer network;
     public Control ui;
     public static LineEdit NameLabel;
+    private ConfigFile configfile = new ConfigFile();
+    private string path;
 
     public override void _Ready() {
         NameLabel = GetNode<LineEdit>("UI/Net/Options/Name");
@@ -58,6 +60,10 @@ public partial class Multiplayer : Node {
         ui.Hide();
         GetTree().Paused = false;
         if (Multiplayer.IsServer()) {
+            path = "res://players.cfg";
+            configfile.Load(path);
+            configfile.SetValue(Convert.ToString(Multiplayer.GetUniqueId()), "Name", NameLabel.Text);
+            configfile.Save(path);
             CallDeferred(MethodName._ChangeLevel, ((PackedScene) ResourceLoader.Load("res://Level.tscn")));
         }
     }

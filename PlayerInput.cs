@@ -3,14 +3,9 @@ using System;
 
 public partial class PlayerInput : MultiplayerSynchronizer
 {
-	private bool _jumping = false;
-	[Export]
-	public bool jumping {get; set;}
-
-	private Vector2 _direction = Vector2.Zero;
-	[Export]
-	public Vector2 direction {get; set;}
-	public Vector2 relative {get; set;}
+	[Export] public bool jumping {get; set;}
+	[Export] public Vector2 direction {get; set;}
+	[Export] public Vector2 relative {get; set;} 
 
 	public override void _EnterTree() {
 
@@ -18,9 +13,13 @@ public partial class PlayerInput : MultiplayerSynchronizer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		GD.Print($"MultiplayerAuthority: {GetMultiplayerAuthority()}\n Network ID: {Multiplayer.GetUniqueId()}");
-
-
 		SetProcess(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
+		//SetProcessInput(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
+	}
+
+	[Rpc(CallLocal = true)]
+	public void Jump() {
+		jumping = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,17 +30,12 @@ public partial class PlayerInput : MultiplayerSynchronizer
 			Rpc(MethodName.Jump);
 		}
 	}
-	public override void _Input(InputEvent @event)
+	/*public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventMouseMotion eventMouseMotion)
 		{
 			relative = -eventMouseMotion.Relative;
 		}
-	}
-
-	[Rpc] // this may need further specification
-	public void Jump() {
-		jumping = true;
-	}
+	}*/
 
 }
