@@ -2,8 +2,6 @@ using Godot;
 using System;
 
 public partial class Player : CharacterBody3D {
-    private ConfigFile configfile = new ConfigFile();
-    private string path;
     public const float SPEED = 5.0f;
     public const float JUMP_VELOCITY = 4.5f;
 
@@ -30,9 +28,6 @@ public partial class Player : CharacterBody3D {
     }
 
     public override void _Ready() {
-        path = "res://players.cfg";
-		configfile.Load(path);
-        Nev =Convert.ToString(configfile.GetValue(Convert.ToString(Multiplayer.GetUniqueId()), "Name"));
         NevLabel = GetNode<Label3D>("NameLabel");
         NevLabel.Text = Nev;
         kamera = GetNode("Camera3D") as Camera3D;
