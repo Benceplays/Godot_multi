@@ -29,7 +29,7 @@ public partial class Player : CharacterBody3D {
 
     public override void _Ready() {
         NevLabel = GetNode<Label3D>("NameLabel");
-        NevLabel.Text = Nev;
+        NevLabel.Text = Name;
         kamera = GetNode("Camera3D") as Camera3D;
         GD.Print("Player._Ready, _player = ", player);
 
