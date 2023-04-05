@@ -5,7 +5,7 @@ public partial class Player : CharacterBody3D {
     public const float SPEED = 5.0f;
     public const float JUMP_VELOCITY = 4.5f;
 
-    public float gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
+    //public float gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
 
     public PlayerInput input;
     public string Nev {get; set;}
@@ -42,10 +42,15 @@ public partial class Player : CharacterBody3D {
 		Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
+    public override void _Process(double delta)
+    {
+        
+		RotateY(input.relative.X * lookSensitivity);
+		kamera.RotateX(input.relative.Y * lookSensitivity);
+		kamera.Rotation = new Vector3((float) Math.Clamp(kamera.Rotation.X,  -Math.PI/2, Math.PI/2), 0, 0);
+    }
     public override void _PhysicsProcess(double delta) {
-        Vector3 tempVelocity = Velocity;
-
-        if (!IsOnFloor()) {
+        /*if (!IsOnFloor()) {
             tempVelocity.Y -= gravity * (float) delta;
         }
 
@@ -53,10 +58,15 @@ public partial class Player : CharacterBody3D {
             tempVelocity.Y = JUMP_VELOCITY;
         }
 
-        input.jumping = false;
+        input.jumping = false;*/
 
         Vector3 direction = (Transform.Basis * new Vector3(input.direction.X, 0, input.direction.Y)).Normalized();
+        UpdatePosition(direction);
+    }
 
+	private void UpdatePosition(Vector3 direction)
+	{
+        Vector3 tempVelocity = Velocity;
         if (direction != Vector3.Zero) {
             tempVelocity.X = direction.X * SPEED;
             tempVelocity.Z = direction.Z * SPEED;
@@ -69,19 +79,8 @@ public partial class Player : CharacterBody3D {
 
         Velocity = tempVelocity;
         MoveAndSlide();
-    }
-    float lookSensitivity = 0.005f; // 
-
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventMouseMotion eventMouseMotion)
-		{
-			RotateY(-eventMouseMotion.Relative.X * lookSensitivity);
-			kamera.RotateX(-eventMouseMotion.Relative.Y * lookSensitivity);
-			kamera.Rotation = new Vector3((float) Math.Clamp(kamera.Rotation.X,  -Math.PI/2, Math.PI/2), 0, 0);
-		}
 	}
-
+    float lookSensitivity = 0.005f; // 
     // public void HandoffInputAuthority(int id)
     // {
     //     player = id;

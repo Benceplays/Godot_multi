@@ -10,6 +10,7 @@ public partial class PlayerInput : MultiplayerSynchronizer
 	private Vector2 _direction = Vector2.Zero;
 	[Export]
 	public Vector2 direction {get; set;}
+	public Vector2 relative {get; set;}
 
 	public override void _EnterTree() {
 
@@ -28,6 +29,13 @@ public partial class PlayerInput : MultiplayerSynchronizer
 
 		if (Input.IsActionJustPressed("ui_accept")) {
 			Rpc(MethodName.Jump);
+		}
+	}
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseMotion eventMouseMotion)
+		{
+			relative = -eventMouseMotion.Relative;
 		}
 	}
 
