@@ -9,6 +9,7 @@ public partial class Level : Node3D {
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
+		
 		if (!Multiplayer.IsServer()) {
 			return;
 		}
@@ -49,8 +50,8 @@ public partial class Level : Node3D {
 		newPlayer.Position = new Vector3(position.X * SPAWN_RANDOM * rng.Randf(), 0, position.Y * SPAWN_RANDOM * rng.Randf());
 
 		newPlayer.Name = id.ToString();
-        var Multiplayer = new Multiplayer();
-		newPlayer.Nev = Multiplayer.NameLabel.Text;
+        /*var Multiplayer = new Multiplayer();
+		newPlayer.Nev = Multiplayer.NameLabel.Text;	*/ 
 		GD.Print($"Adding {id} to scene tree");
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);
 	}
