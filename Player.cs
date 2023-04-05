@@ -41,13 +41,16 @@ public partial class Player : CharacterBody3D {
 		kamera = GetNode("Camera3D") as Camera3D;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
     }
-
-    public override void _Process(double delta)
-    {
         
-		RotateY(input.relative.X * lookSensitivity);
-		kamera.RotateX(input.relative.Y * lookSensitivity);
-		kamera.Rotation = new Vector3((float) Math.Clamp(kamera.Rotation.X,  -Math.PI/2, Math.PI/2), 0, 0);
+    float lookSensitivity = 0.005f;
+    public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseMotion eventMouseMotion)
+		{
+		    RotateY(input.relative.X * lookSensitivity);
+		    kamera.RotateX(input.relative.Y * lookSensitivity);
+		    kamera.Rotation = new Vector3((float) Math.Clamp(kamera.Rotation.X,  -Math.PI/2, Math.PI/2), 0, 0);
+        }
     }
     public override void _PhysicsProcess(double delta) {
         /*if (!IsOnFloor()) {
@@ -80,7 +83,6 @@ public partial class Player : CharacterBody3D {
         Velocity = tempVelocity;
         MoveAndSlide();
 	}
-    float lookSensitivity = 0.005f; // 
     // public void HandoffInputAuthority(int id)
     // {
     //     player = id;
